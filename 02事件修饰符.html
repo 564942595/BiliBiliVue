@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件修饰符</title>
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+       <style>
+              .wraper{width:300px;height:300px;background-color: pink}
+       </style>
+</head>
+<body>
+	<div id="app">
+              <h4>1、stop阻止冒泡</h4>
+              <p>点击btn 的时候冒泡到div,先执行btn 再执行 div</p>
+		<div class='wraper' @click='divHandler'>
+                     <!-- 发生冒泡 -->
+                   <input type="button" value='按钮' @click='btnHandler'>
+                   <!-- 阻止了冒泡 -->
+                   <input type="button" value='按钮' @click.stop='btnHandler'>
+              </div>
+
+              <h4>2、prevent阻止默认事件</h4>
+              <p>点击a标签的时候，阻止了herf的跳转行为</p>
+              <!-- 执行完事件后发生了跳转 -->
+              <a href="http://www.baidu.com" @click='aClick'>有问题找百度</a>
+              <!-- 执行完事件后阻止了跳转 -->
+              <a href="http://www.baidu.com" @click.prevent='aClick'>有问题找百度</a>
+
+              <h4>3、capture添加事件监听器时使用事件捕获模式</h4>
+               <p>点击btn的时候本应先执行btn事件，捕获div后变成先执行div事件</p>
+              <div class='wraper' @click.capture='divHandler'>
+                   <input type="button" value='按钮' @click='btnHandler'>
+              </div>
+
+              <h4>4、self只在该元素本身触发时触发回调</h4>
+              <p>点击按钮的时候只触发按钮事件,不冒泡到div，只有点击div本身的时候才触发div事件</p>
+              <div class='wraper' @click.self='divHandler'>
+                   <input type="button" value='按钮' @click='btnHandler'>
+              </div>
+
+
+               <h4>5、once事件只触发一次</h4>
+               <p>点击a标签的时候，第一次不跳转，第二次跳转</p>
+               <a href="http://www.baidu.com" @click.prevent.once='aClick'>有问题找百度</a>
+	</div>
+	
+	<script>
+       var vm=new Vue({
+       	el:'#app',
+       	data:{
+       		
+       	},
+       	methods:{
+       		divHandler(){
+                            console.log("触发了div的点击事件")
+                     },
+                     btnHandler(){
+                            console.log("触发了btn的点击事件")
+                     },
+                     aClick(){
+                            console.log("触发了a标签事件")
+                     }
+       	}
+       })
+	</script>
+</body>
+</html>

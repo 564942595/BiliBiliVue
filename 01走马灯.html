@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>走马灯</title>
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<input type="button" value='走你' @click='animate()'>
+		<input type="button" value='低调' @click='stop()'>
+		<h1>{{msg}}</h1>
+	</div>
+	
+	<script>
+       var vm=new Vue({
+       	el:'#app',
+       	data:{
+       		msg:'我是一串文字，动起来',
+       		intervalId:null
+       	},
+       	methods:{
+       		animate(){
+       			if(this.intervalId!=null)return;//避免多次触发
+       			this.intervalId=setInterval(()=>{//ES6 this指向
+       				this.msg=this.msg.substring(1,this.msg.length)+this.msg.substring(0,1);
+       			},400)
+       		},
+       		stop(){
+       			clearInterval(this.intervalId);
+       			this.intervalId=null;
+       		}
+       	}
+       })
+	</script>
+</body>
+</html>
