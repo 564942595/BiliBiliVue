@@ -2,16 +2,23 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>过滤器</title>
+	<title>私有过滤器</title>
 	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
 </head>
 <body>
 	<div id="app">
+      <h2>app</h2>
       <p>{{ msg |msgFormat |msgFormat2('疯狂','+1','+2')}}</p>
 	</div>
 	
+  <div id="app2">
+      <h2>app2</h2>
+      <p>{{ msg |msgFormat }}</p>
+  </div>
+  </div>
 	<script>
 
+        //这是全局过滤器
         Vue.filter('msgFormat',function(data){//data参数是过滤器|前面的数据
           return data.replace(/单纯/g,'邪恶');
         })
@@ -30,6 +37,21 @@
        	methods:{
        		
        	}
+       })
+
+        var vm2=new Vue({
+        el:'#app2',
+        data:{
+          msg:'我是一个单纯的少年，单纯的想，谁是世界上最单纯的人？'
+        },
+        methods:{
+          
+        },
+        filters:{//只作用在app2中的私有过滤器，当全局和私有过滤器的名称一样时，就近原则，执行私有
+          msgFormat:function(data){
+            return data.replace(/单纯/g,'邪恶...');
+          }
+        }
        })
 	</script>
 </body>
