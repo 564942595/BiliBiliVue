@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>v-for中key的使用注意事项</title>
+  <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+       <style>
+              
+       </style>
+</head>
+<body>
+	<div id="app">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">添加品牌</h3>
+      </div>
+      <div class="panel-body form-inline">
+        <label>
+            ID:
+            <input type="text" v-model='id'>
+        </label>
+        <label>
+            Name:
+            <input type="text" v-model='name'>
+        </label>
+        <input type="button" value="添加" class="btn btn-primary" @click='add'> 
+      </div>
+    </div> 
+    <table class='table table-bordered table-hover table-striped'>
+        <thead>
+            <tr>
+              <td>ID</td>
+              <td>Name</td>
+              <td>Ctime</td>
+              <td>Operration</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="item in list" :key='item.id'>
+              <td>{{item.id}}</td>
+
+              <td>{{item.name}}</td>
+
+              <td>{{item.ctime}}</td>
+
+              <td><a href="" @click.prevent='del(item.id)'>删除</a></td>
+            </tr>
+        </tbody>
+    </table>
+	</div>
+	
+	<script>
+       var vm=new Vue({
+       	el:'#app',
+       	data:{
+          id:"",
+          name:"",
+       		list:[
+            {id:1,name:"奔驰",ctime:new Date()},
+            {id:2,name:"宝马",ctime:new Date()}
+          ]
+       	},
+       	methods:{
+       	  add(){
+            var car={id:this.id,name:this.name,ctime:new Date()};
+             this.list.push(car);
+             this.id=this.name="";//添加后清空输入框
+          },
+          del(id){//根据id删除数据
+
+            //方法一
+              // for(i=0;i<this.list.length;i++){
+              //   if(id==this.list[i].id){
+              //     this.list.splice(i,1);
+              //   }
+              // }
+              
+              // 方法二   ES6
+              // var index=this.list.findIndex(item=>{
+              //   if(item.id==id){
+              //     return true;
+              //   }
+              // })
+              // this.list.splice(index,1)
+              
+              //方法三 ES6
+              this.list.some((item,i)=>{
+                if(item.id==id){
+                  this.list.splice(i,1);
+                  return true;
+                }
+              })
+          }
+       	}
+       })
+	</script>
+</body>
+</html>
