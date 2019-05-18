@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>过滤器</title>
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+      <p>{{ msg |msgFormat |msgFormat2('疯狂','+1','+2')}}</p>
+	</div>
+	
+	<script>
+
+        Vue.filter('msgFormat',function(data){
+          return data.replace(/单纯/g,'邪恶');
+        })
+
+        //可以使用多个过滤器
+        //过滤器可以添加多个参数
+        Vue.filter('msgFormat2',function(data,arg,arg2,arg3){
+          return data.replace('世界上',arg+arg2+arg3);
+        })
+
+       var vm=new Vue({
+       	el:'#app',
+       	data:{
+       		msg:'我是一个单纯的少年，单纯的想，谁是世界上最单纯的人？'
+       	},
+       	methods:{
+       		
+       	}
+       })
+	</script>
+</body>
+</html>

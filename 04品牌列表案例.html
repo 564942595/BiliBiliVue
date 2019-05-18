@@ -25,6 +25,10 @@
             <input type="text" v-model='name'>
         </label>
         <input type="button" value="添加" class="btn btn-primary" @click='add'> 
+         <label>
+            关键字查询:
+            <input type="text" v-model='keywords'>
+        </label>
       </div>
     </div> 
     <table class='table table-bordered table-hover table-striped'>
@@ -37,7 +41,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in list" :key='item.id'>
+            <!-- <tr v-for="item in list" :key='item.id'> -->
+            <tr v-for="item in search(keywords)" :key='item.id'>
               <td>{{item.id}}</td>
 
               <td>{{item.name}}</td>
@@ -48,6 +53,13 @@
             </tr>
         </tbody>
     </table>
+
+
+
+    
+    
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <h5>安装vue调试工具，Vue-devtools,安装指南：   https://blog.csdn.net/yue31313/article/details/79862363</h5>
 	</div>
 	
 	<script>
@@ -56,12 +68,22 @@
        	data:{
           id:"",
           name:"",
+          keywords:"",
        		list:[
             {id:1,name:"奔驰",ctime:new Date()},
             {id:2,name:"宝马",ctime:new Date()}
           ]
        	},
        	methods:{
+          search(key){//关键词查询，以前都是直接循环list，这次是循环一个函数，并且传参，参数绑定model  keywords
+            var newList=[];
+            this.list.forEach(item=>{
+              if(item.name.indexOf(key)!=-1){
+                newList.push(item)
+              }
+            })
+            return newList;
+          },
        	  add(){
             var car={id:this.id,name:this.name,ctime:new Date()};
              this.list.push(car);
