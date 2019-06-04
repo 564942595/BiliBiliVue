@@ -16,6 +16,11 @@
    		<input type="button" value ='jsonp请求' @click='jsonpInfo'>
 	</div>
 <script>
+//为了便于维护，请求接口的根目录可以全局配置
+//以后所有的请求就不用写http://lenovoserver:90/了，只需要把后面的地址补齐就可以了
+//注意url前面不能加/
+Vue.http.options.root='http://lenovoserver:90/';
+
 var vm=new Vue({
 		el:'#app',
 		data:{
@@ -23,7 +28,8 @@ var vm=new Vue({
 		},
 		methods:{
 			 getInfo(){//vue-resource   get 请求
-			 	this.$http.get("http://lenovoserver:90/MaintenceApi/Modify/",
+			 	//this.$http.get("http://lenovoserver:90/MaintenceApi/Modify/",
+			 	this.$http.get("MaintenceApi/Modify/",//这时候前面就不用写http://lenovoserver:90/了，注意url前面不能加/
 			 		{ 
 			 		  type: "GetElevator", 
 			 		  data: "{ \"rescueCode\":\"009999\"}", 
@@ -39,7 +45,7 @@ var vm=new Vue({
 			 	//配置项  其中emulateJSON最好设置为true，设置发送内容格式为表单默认格式  
 			 	//-----注意如果参数和配置都没有也要写上两个{}，{} 
 			 	this.$http.post(
-			 		'http://lenovoserver:90/MaintenceApi/Modify/',
+			 		'MaintenceApi/Modify/',
 			 		{ 
 			 			"type": "GetElevator", 
 			 			data: "{ \"rescueCode\":\"009999\"}", 
