@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue 组件中data</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<com></com>
+   	</div>
+
+   	
+   	<template id='temp'>
+		<div>
+			<h1>{{msg}}</h1>
+		</div>
+	</template>
+
+<script>
+
+		
+var vm=new Vue({
+		el:'#app',
+		data:{},
+		methods:{
+		},
+		components:{
+			com:{
+				template:"#temp",
+				data:function(){//1、必需是函数
+					return {//2、必需返回一个对象
+						msg:"这是在组件中定义的数据"
+					}
+				}
+			}
+		}
+})
+
+</script>
+</body>
+</html>

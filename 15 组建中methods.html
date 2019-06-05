@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue 组件中methods</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<counter></counter>
+		<!-- <hr>
+		<counter></counter> -->
+		
+   	</div>
+
+   	
+   	<template id='temp'>
+		<div>
+			<input type="butotn" value="+1" @click='add'>
+			<h1>{{count}}</h1>
+		</div>
+	</template>
+
+<script>
+
+		
+var vm=new Vue({
+		el:'#app',
+		data:{},
+		methods:{
+		},
+		components:{
+			counter:{
+				template:"#temp",
+				data:function(){//1、必需是函数
+					return {//2、必需返回一个对象
+						count:0
+					}
+				},
+				methods:{
+					add(){
+						this.count++;
+						}
+					}
+				}
+		}
+})
+
+</script>
+</body>
+</html>
