@@ -7,15 +7,12 @@
 </head>
 <body>
 	<div id="app">
-		<a href="" @click.prevent="comName='login'">登录</a>
-		<a href="" @click.prevent="comName='reginster'">注册</a>
-		<!-- Vue 提供了component来展示对应名称的组件 -->
-		<!-- 可以实现多个组件之间的切换 -->
-		<component :is="comName"></component>
+		<a href="" @click.prevent='flag=true'>登录</a>
+		<a href="" @click.prevent='flag=false'>注册</a>
+		<login v-if='flag'></login>
+		<reginster v-else='flag'></reginster>
    	</div>
 
-	<!-- 当前学习的Vue标签
-	component   template  transition  transitionGroup -->
    	<template id='temp'>
 		<div>
 			登录页面
@@ -33,7 +30,7 @@
 var vm=new Vue({
 		el:'#app',
 		data:{
-			comName:'login'//默认显示登录页
+			flag:true,
 		},
 		methods:{},
 		components:{

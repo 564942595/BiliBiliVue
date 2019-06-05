@@ -4,18 +4,29 @@
 	<meta charset="UTF-8">
 	<title>组件切换</title>
   <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  <style>
+		.v-enter,
+		.v-leave-to{
+			opacity:0;
+			transform: translateX(150px);
+		}
+		.v-enter-active,
+		.v-leave-active{
+			transition: all 0.5s ease;
+		}
+  </style>
 </head>
 <body>
 	<div id="app">
 		<a href="" @click.prevent="comName='login'">登录</a>
 		<a href="" @click.prevent="comName='reginster'">注册</a>
-		<!-- Vue 提供了component来展示对应名称的组件 -->
-		<!-- 可以实现多个组件之间的切换 -->
-		<component :is="comName"></component>
+		<!-- 用transition包裹component组件
+		mode 定义组件消失后，另一个再进来，避免两个组件同时出现 -->
+		<transition mode='out-in'>
+			<component :is="comName"></component>
+		</transition>
    	</div>
 
-	<!-- 当前学习的Vue标签
-	component   template  transition  transitionGroup -->
    	<template id='temp'>
 		<div>
 			登录页面
@@ -28,7 +39,6 @@
 		</div>
 	</template>
 <script>
-
 		
 var vm=new Vue({
 		el:'#app',
