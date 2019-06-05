@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue 动画</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  <style>
+	.v-enter,
+	.v-leave-to{
+		opacity:0;
+		transform:translateX(150px) 
+	}
+	.v-enter-active,
+	.v-leave-active{
+		transition:all 0.5s ;
+	}
+  </style>
+</head>
+<body>
+	<div id="app">
+   		<input type="button" value ='toggle' @click='flag=!flag'>
+
+<!-- 使用方法 -->
+<!-- 第一步，先用tarnsition包裹动画元素
+第二步，添加动画
+v-enter       动画前样式
+v-leave-to    动画结束后样式
+.v-enter-active,   动画时间段
+.v-leave-active
+ -->
+   		<transition>
+   			<h1 v-if='flag'>这是一个h1元素</h1>
+   		</transition>
+	</div>
+<script>
+
+var vm=new Vue({
+		el:'#app',
+		data:{
+			flag:false
+		},
+		methods:{
+		}
+})
+</script>
+</body>
+</html>

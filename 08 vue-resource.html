@@ -20,6 +20,8 @@
 //以后所有的请求就不用写http://lenovoserver:90/了，只需要把后面的地址补齐就可以了
 //注意url前面不能加/
 Vue.http.options.root='http://lenovoserver:90/';
+//全局配置emulateJSON，下面的post请求也可以省略第三个{}
+Vue.http.options.emulateJSON=true;
 
 var vm=new Vue({
 		el:'#app',
@@ -51,7 +53,8 @@ var vm=new Vue({
 			 			data: "{ \"rescueCode\":\"009999\"}", 
 			 			"us": "E2EMIZmPqGnBm1bAX8nH/s5L8rqffrZcxFw+1J+TFDsq0pNaD4ziwB4VlgK5OMo4ihWaV3OeNY9H/AUgl5CEsA==" 
 			 		},
-			 		{emulateJSON:true})
+			 		//{emulateJSON:true}
+			 	)
 			 	.then(data=>{
 			 		console.log(data);
 			 	},err=>{

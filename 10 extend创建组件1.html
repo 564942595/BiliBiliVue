@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue 组件</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<my-com1></my-com1>
+		<!-- 一介绍 -->
+		<!-- 1、什么是组件：
+		组件的出现，是为了拆分Vue实例的代码量，能够让我们以不同的组件来划分不同功能的模块，将来我们需要什么样的功能，就可以调对应的组件。
+		2、组件化和模块化的不同：
+		模块化是从代码逻辑的角度划分的；方便代码分层开发，保证每个功能职能单一（node）
+		组件化是从UI界面角度进行划分的，前端的组件化，方便UI组件的重用。 -->
+   	</div>
+<script>
+// 创建组件方法
+// 方法一：Vue.extend
+// 	    1、Vue.extend  创建全局组件
+		var com1=Vue.extend({
+			template:"<h2>extend创建的组件</h2>"
+		});
+//		2、
+		Vue.component('myCom1',com1)
+//		3、以html标签的形式调用
+
+	
+//合并写法,将上面的两步合并为一步
+
+		// Vue.component('myCom1',Vue.extend({
+		// 	template:"<h2>extend创建的组件</h2>"
+		// }))
+
+			
+var vm=new Vue({
+		el:'#app',
+		data:{
+			flag:false
+		},
+		methods:{
+		}
+})
+</script>
+</body>
+</html>

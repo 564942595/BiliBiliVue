@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue 组件</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<my-com3></my-com3>
+   	</div>
+
+   	<template id='temp'>
+		<div>
+			<h1>还是只能有一个根元素</h1>
+			<h4>234</h4>
+		</div>
+	</template>
+<script>
+// 创建组件方法
+// 方法三：
+
+Vue.component('myCom3',{
+	template:'#temp'
+})
+
+			
+var vm=new Vue({
+		el:'#app',
+		data:{
+			flag:false
+		},
+		methods:{
+		}
+})
+</script>
+</body>
+</html>

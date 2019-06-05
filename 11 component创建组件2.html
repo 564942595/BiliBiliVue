@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue 组件</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<my-com2></my-com2>
+   	</div>
+<script>
+// 创建组件方法
+// 方法二：在Vue.component中直接创建
+
+Vue.component('myCom2',{
+	template:"<div><h1>组件</h1><span>123</span></div>"
+})
+//注意：template创建出来的组件，根元素只能有一个（把外层的div去掉，h1和span两个就会报错）
+
+
+			
+var vm=new Vue({
+		el:'#app',
+		data:{
+			flag:false
+		},
+		methods:{
+		}
+})
+</script>
+</body>
+</html>
