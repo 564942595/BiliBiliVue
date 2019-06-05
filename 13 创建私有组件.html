@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue 组件</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<my-com3></my-com3>
+   	</div>
+
+   	<div id="app2">
+		<my-com3></my-com3>
+		<login></login>
+		<login2></login2>
+   	</div>
+
+   	<template id='temp'>
+		<div>
+			<h1>我是全局组件，在App和App2中都能调用</h1>
+			<h4>234</h4>
+		</div>
+	</template>
+	<template id='temp2'>
+		<div>
+			<h1>我是私有组件</h1>
+			<h4>234</h4>
+		</div>
+	</template>
+<script>
+// 创建组件方法
+// 方法三：
+
+Vue.component('myCom3',{
+	template:'#temp'
+})
+
+			
+var vm=new Vue({
+		el:'#app',
+		data:{},
+		methods:{
+		}
+})
+var vm2=new Vue({
+		el:'#app2',
+		data:{},
+		methods:{
+		},
+		directives:{},
+		filters:{},
+		components:{
+			login:{
+				template:"<h2>我是app2的私有组件,在其他注册实例中引用会报错</h2>"
+			},
+			login2:{
+				template:"#temp2"
+			}
+		}
+})
+</script>
+</body>
+</html>
