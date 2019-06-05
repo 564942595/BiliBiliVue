@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件切换</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<a href="" @click.prevent='flag=true'>登录</a>
+		<a href="" @click.prevent='flag=false'>注册</a>
+		<login v-if='flag'></login>
+		<reginster v-else='flag'></reginster>
+   	</div>
+
+   	<template id='temp'>
+		<div>
+			登录页面
+		</div>
+	</template>
+	
+	<template id='temp2'>
+		<div>
+			注册页面
+		</div>
+	</template>
+<script>
+//这种方法只能实现两个组件的切换
+		
+var vm=new Vue({
+		el:'#app',
+		data:{
+			flag:true,
+		},
+		methods:{},
+		components:{
+			login:{
+				template:"#temp"
+				},
+			reginster:{
+				template:"#temp2"
+				}
+		}
+})
+
+</script>
+</body>
+</html>
