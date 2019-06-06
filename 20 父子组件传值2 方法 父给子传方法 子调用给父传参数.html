@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>父子组件传值</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		{{farthermsg}}
+		<com @func='fartherMethod'></com>
+
+   	</div>
+
+   	<template id='temp'>
+		<div>
+			<input type="button" value='我是子组件的按钮，点击触发父组件的方法，并传参数' @click='sonMethod'>
+		</div>
+	</template>
+	
+	
+<script>
+//1、父组件给子组件传方法  通过事件绑定  @名称=父组件的方法
+//2、子组件通过调用组件内部的私有方法，触发父组件的方法
+//3、子组件触发父组件的方法  通过  this.$emit('名称'，‘参数’。。。。)，可以多个参数
+//4、实现了父组件给子组件传方法；也实现了子组件给父组件传值
+var vm=new Vue({
+		el:'#app',
+		data:{
+			farthermsg:null
+		},
+		methods:{
+			fartherMethod(a,b){
+				console.log("我是父组件的方法"+a+b);
+				this.farthermsg=a+b;
+			}
+		},
+		components:{
+			com:{
+				template:"#temp",
+				methods:{
+					sonMethod(){
+						this.$emit('func','参数1','参数2')
+					}
+				}
+			}
+		}
+})
+
+</script>
+</body>
+</html>

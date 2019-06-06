@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>父子组件传值</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<com :msgdata='msg'></com>
+   	</div>
+
+   	<template id='temp'>
+		<div>
+			{{msgdata}}
+		</div>
+	</template>
+	
+	
+<script>
+	//1、在组件标签上绑定
+	//2、在子组件props定义一下
+	//3、子组件就可以应用接到的父组件的数据了
+Vue.component('com',{
+	template:'#temp',
+	props:['msgdata'],
+	data(){
+		return {
+//props中的数据是父组件传递过来的；数据只读
+//data中的数据都是组件私有的，比如请求来的数据
+//data中的数据，可读可写
+		}
+	}
+})
+
+var vm=new Vue({
+		el:'#app',
+		data:{
+			msg:"我是父组件的数据"
+		},
+		methods:{},
+		components:{
+			
+		}
+})
+
+</script>
+</body>
+</html>
