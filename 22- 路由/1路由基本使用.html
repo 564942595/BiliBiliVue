@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>路由的基本使用</title>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<style>
+.myActive{color:red;font-size: 35px;}
+
+/*路由切换动画*/
+.v-enter,
+.v-leave-to{
+	opacity: 0;
+	transform: translateX(150px);
+}
+.v-enter-active,
+.v-leave-active{
+	transition: all 0.5s ease;
+}
+</style>
+</head>
+<body>
+	<div id="app">
+		<!-- 第五步：添加标签，切换路由 -->
+
+		<!-- 可以实现，但是不推荐 -->
+		<!-- <a href="#/login">登录</a>
+		<a href="#/register">注册</a> -->
+
+		<!-- router-link 默认渲染后是一个a标签  要改成span  设置tag=span -->
+		<router-link to='/login' tag='span'>登录</router-link>
+		<router-link to='/register'>注册</router-link>
+
+		<hr>
+
+         <!-- 第四步：添加展示标签 -->
+         <transition mode='out-in'>
+		 	<router-view></router-view> 
+		 </transition>
+   	</div>
+<script>
+//第一步引入组件
+var login={
+	template:"<div>登录组件</div>"
+}
+var register={
+	template:"<div>注册组件</div>"
+}
+
+//第二步配置路由的构造函数
+//引入vue router  js就是相当于引入了一个构造函数
+var routerObj=new VueRouter({
+	routes:[
+		{path:'/',redirect:'/login'},//redirect 重定向  根路径指向login路径，打开根目录就跳到login路径
+		{path:'/login',component:login},
+		{path:'/register',component:register}
+	],
+	linkActiveClass:"myActive"//配置选中项标签的默认样式类名称（设置后选中项就会添加一个class类，默认值是router-link-active）
+})
+
+//第三步 把构造函数和vm结合起来
+var vm=new Vue({
+		el:'#app',
+		data:{
+			
+		},
+		methods:{
+			
+		},
+		components:{
+			
+		},
+		router:routerObj
+})
+
+</script>
+</body>
+</html>

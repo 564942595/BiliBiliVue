@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>嵌套路由</title>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<style>
+
+</style>
+</head>
+<body>
+
+	<div id="app">
+		<router-link to='/user'>跳转到用户组件</router-link>
+		<router-view></router-view>
+   	</div>
+
+   	<template id='temp'>
+		<div>
+			这里是用户组件
+			
+			<br>
+			<!-- 注意  to='/user/login' -->
+			<!-- 点击之后用户组件的内容依然存在 -->
+			<router-link to='/user/login'>登录</router-link>
+			<br>
+			<router-link to='/user/register'>注册</router-link>
+			<br>
+			<!-- 点击之后用户组件的内容消失 -->
+			<router-link to='/login2'>对比不用嵌套路由，同级路由，点击登录</router-link>
+			<router-view></router-view>
+		</div>
+   	</template>
+<script>
+var user={
+	template:"#temp"
+}
+var login={
+	template:"<h2>登录组件的内容</h2>"
+}
+var register={
+	template:"<h2>注册组件的内容</h2>"
+}
+
+var router=new VueRouter({
+	routes:[
+		{
+			path:'/user',
+			component:user,
+			children:[
+				{path:'login',component:login},//注意这里的path没有  /
+				{path:'register',component:register}
+			]
+		},
+		{
+			path:'/login2',
+			component:login
+		}
+	]
+})
+
+var vm=new Vue({
+		el:'#app',
+		data:{},
+		methods:{},
+		components:{},
+		router
+})
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>路由参数</title>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<style>
+
+</style>
+</head>
+<body>
+	<div id="app">
+		<router-link to='/login?id=10&name=kk'>登录</router-link>
+		<router-link to='/register/11/mm'>注册</router-link>
+
+		<router-view></router-view>
+   	</div>
+<script>
+var login={
+	template:"<div>登录----{{$route.query.id}}----{{$route.query.name}}</div>",
+	created(){
+		//方法一： <router-link to='/login?id=10&name=kk'>
+		//获取login传递的参数。这种方法不需要修改路由的path
+		console.log(this.$route);
+		console.log(this.$route.query.id);
+		console.log(this.$route.query.name)
+	}
+}
+
+var register={
+	template:"<div>注册----{{$route.params.id}}----{{$route.params.name}}</div>",
+	created(){
+		//方法二： <router-link to='/register/11/mm'>
+		//获取register传递的参数  需要改变path   /:id表示一个占位符
+		console.log(this.$route);
+		console.log(this.$route.params.id);
+		console.log(this.$route.params.name);
+	}
+}
+
+var router=new VueRouter({
+	routes:[
+		{path:'/login',component:login},
+		{path:'/register/:id/:name',component:register}
+	]
+})
+
+var vm=new Vue({
+		el:'#app',
+		data:{},
+		methods:{},
+		components:{},
+		router
+})
+
+
+</script>
+</body>
+</html>
