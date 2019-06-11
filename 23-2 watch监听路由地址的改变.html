@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>watch监听路由地址改变</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+	<div id="app">
+		<router-link to='/login'>登录</router-link>
+		<router-link to='/register'>注册</router-link>
+		<router-view></router-view>
+   	</div>
+<script>
+var login={
+	template:"<div>登录</div>"
+}
+var register={
+	template:"<div>注册</div>"
+}
+
+var router=new VueRouter({
+	routes:[
+		{path:'/login',component:login},
+		{path:'/register',component:register},
+	]
+})
+
+var vm=new Vue({
+		el:'#app',
+		data:{
+			
+		},
+		methods:{
+			
+		},
+		components:{
+			
+		},
+		router,
+		watch:{
+			//注意这里写的是$route.path    ,没有this
+			"$route.path":function(newVal,oldVal){
+				console.log(newVal);
+				if(newVal==="/register"){
+					alert("切换到注册页面")
+				}else if(newVal==="/login"){
+					alert("切换到登录页面")
+				}
+			}
+		}
+})
+
+</script>
+</body>
+</html>
