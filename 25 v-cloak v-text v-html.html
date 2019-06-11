@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>computed计算属性</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  <style>
+  	[v-cloak]{display: none}
+  </style>
+</head>
+<body>
+	<div id="app">
+		v-cloak解决vue没加载出来的时候页面出现{{msg}},加载后变成数据的现象，实现加载完vue后直接显示数据，没加载出来的时候display:none
+		<p v-cloak>{{msg}}</p>
+
+		<br>
+
+		{{msg}}
+
+		<br>
+
+		<p v-text="text"></p>
+		<p v-html="html"></p>
+   	</div>
+<script>
+
+var vm=new Vue({
+		el:'#app',
+		data:{
+			msg:"123456",
+			text:"<h1>123456</h1>",
+			html:"<h1>123456</h1>"
+		},
+		methods:{
+			
+		},
+		components:{
+			
+		}
+		
+	
+		
+})
+
+</script>
+</body>
+</html>
