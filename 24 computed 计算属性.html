@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>computed计算属性</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model="firstname">
+		+
+		<input type="text" v-model="lastname">
+		=
+		<input type="text" v-model="fullname">
+
+		{{fullname}}
+
+		{{fullname}}
+
+		{{fullname}}
+   	</div>
+<script>
+
+var vm=new Vue({
+		el:'#app',
+		data:{
+			firstname:"",
+			lastname:""
+		},
+		methods:{
+			
+		},
+		components:{
+			
+		},
+		computed:{
+			"fullname":function(){
+				console.log("调用了计算属性，只在改变的时候调用一次，保存在缓存，其它的属性调用缓存")
+				return this.firstname+"-"+this.lastname
+			}
+		}
+	
+		
+})
+
+</script>
+</body>
+</html>
