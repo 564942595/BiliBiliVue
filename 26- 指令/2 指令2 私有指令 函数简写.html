@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>私有指令</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p v-fontweight="300">我是app中的内容</p>
+   	</div>
+
+   	<div id="app2">
+		<p v-fontweight="600" v-color="'pink'" v-fontsize="50">我是app2中的内容</p>
+   	</div>
+<script>
+//这是全局指令在App和App2中都能生效
+Vue.directive('fontweight',{
+	bind:function(el,binding){
+		el.style.fontWeight=binding.value;
+	}
+})
+
+var vm=new Vue({
+		el:'#app',
+		data:{
+			
+		},
+		methods:{
+			
+		},
+		components:{
+			
+		}	
+})
+
+var vm=new Vue({
+		el:'#app2',
+		data:{
+			
+		},
+		methods:{
+			
+		},
+		components:{
+			
+		}	,
+		directives:{//注意加s  ;directives
+			"color":{
+				bind:function(el,binding){
+					//这是私有指令，只能在App2中生效
+					el.style.color=binding.value;
+				}
+			},
+			"fontsize":function(el,binding){//函数简写，相当于在bind 和 updated中都写了一遍方法
+					el.style.fontSize=parseInt(binding.value)+"px";
+			}
+		}
+})
+</script>
+</body>
+</html>
