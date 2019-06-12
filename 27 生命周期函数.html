@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>生命周期函数</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p ref='mg'>{{msg}}</p>
+		<br>
+		<input type="button" @click='change' value ="点击我观察beforeUpdate 和updated 生命周期函数">
+		<br>
+		<hr>
+
+		<button @click='changeFlag'>点击我</button>
+		<tem v-if="flag"></tem>
+   	</div>
+
+   	<template id='temp'>
+		<div>
+            {{dataMsg}}
+		</div>
+   	</template>
+<script>
+var tem={
+	template:"#temp",
+	data(){
+		return {
+			dataMsg:"我是一个组件"
+		}
+	},
+	beforeDestroy:function(){
+		console.log("销毁前")
+	},
+	destroyed:function(){
+		console.log("已经销毁")
+	}
+}
+var vm=new Vue({
+		el:'#app',
+		data:{
+			msg:"初始化的msg",
+			flag:true
+		},
+		methods:{
+			show(){
+				console.log("调用了show方法")
+			},
+			change(){
+				this.msg="改变后的msg";
+			},
+			changeFlag(){
+				this.flag=!this.flag;
+			}
+		},
+		components:{
+			tem
+		},
+		beforeCreate:function(){
+			console.log(this.msg);//undefined  
+			//this.show() //报错
+			//这个时候data和methods还没有初始化完成，不能调用
+		},
+		created:function(){
+			console.log(this.msg);
+			this.show()
+			//data 和 methods   可以调用
+		},
+		beforeMount:function(){
+			console.log(this.$refs.mg)//undefined  
+			//初始化模板但是还没有加载到DOM页面
+		},
+		mounted:function(){
+			console.log(this.$refs.mg.innerText)
+			//DOM初始化完成，可以执行DOM操作
+		},
+		beforeUpdate:function(){
+			console.log(this.$refs.mg.innerText);//改变前
+			console.log(this.msg)//改变后
+			//输出的是改变前的数据；和data不同步
+		},
+		updated:function(){
+			console.log(this.$refs.mg.innerText);//改变后
+			console.log(this.msg)//改变后
+			//输出的是改变后的，和data同步
+		}
+		
+		
+	
+		
+})
+
+</script>
+</body>
+</html>
