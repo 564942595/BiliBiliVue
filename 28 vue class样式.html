@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>class样式</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  <style>
+	.red{color:red;}
+	.thin{font-weight: 100}
+	.underline{text-decoration: underline;}
+  </style>
+</head>
+<body>
+	<div id="app">
+		<p>第一种用法：数组</p>
+		<h1 :class="['red','thin']">我是一大大大的H1</h1>
+
+		<br>
+
+		<p>第二种用法：三元表达式(但是这样写法复杂，代码可读性不高，比较推荐给对象)</p>
+		<h1 :class="['red','thin',flag?'underline':'']">我是一大大大的H1</h1>
+
+		<br>
+
+		<p>第三种用法：数组、对象组合</p>
+		<h1 :class="['red','thin',{underline:flag}]">我是一大大大的H1</h1>
+
+		<br>
+
+		<p>第四种用法：对象</p>
+		<h1 :class="{underline:flag,red:flag}">我是一大大大的H1</h1>
+
+		<br>
+
+		<p>第五种用法：对象简写</p>
+		<h1 :class="styleInfor">我是一大大大的H1</h1>
+   	</div>
+
+   
+<script>
+
+var vm=new Vue({
+		el:'#app',
+		data:{
+			flag:true,
+			styleInfor:{underline:true,red:true}
+		},
+		methods:{
+			
+		},
+		components:{
+			
+		},
+})
+
+</script>
+</body>
+</html>
