@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>style内联样式</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p>第一种：键值对（注意如果键名有—必须加引号）</p>
+		<p :style="{color:'red','text-decoration':'underline'}">style内联样式</p>
+
+		<br>
+
+		<p>第二种：简写引用</p>
+		<p :style="styleObj1">style内联样式</p>
+
+		<br>
+
+		<p>第三种：简写，数组的形式引用多个键值对</p>
+		<p :style="[styleObj1,styleObj2]">style内联样式</p>
+   	</div>
+
+   
+<script>
+
+var vm=new Vue({
+		el:'#app',
+		data:{
+			styleObj1:{color:'red','text-decoration':'underline'},
+			styleObj2:{'font-style':"italic"},
+		},
+		methods:{
+			
+		},
+		components:{
+			
+		},
+})
+
+</script>
+</body>
+</html>
