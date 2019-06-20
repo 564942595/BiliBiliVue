@@ -30,6 +30,9 @@ Vue.component('com',{
 //data中的数据都是组件私有的，比如请求来的数据
 //data中的数据，可读可写
 		}
+	},
+	created(){
+		console.log("父组件传过来的参数用的时候还是要加this"+this.msgdata)
 	}
 })
 
