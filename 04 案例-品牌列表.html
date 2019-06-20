@@ -64,6 +64,9 @@
 	<script>
       //-------全局过滤器
       //Vue过滤器，格式化时间
+     
+      //Vue.filter('dateFormatter',function(data,pattern="YYYY-MM-DD HH:MM:ss")
+      //{{item.date | dateFormatter('YYYY-mm-dd')}}做判断返回什么样的格式
       Vue.filter('dateFormatter',function(data,pattern=""){//pattern=""  如果没有传参数就是undefined ,用toLowerCase的时候就会报错，这样表示没有参数就是空字符串
         var dt=new Date(data);
         var y=dt.getFullYear();
