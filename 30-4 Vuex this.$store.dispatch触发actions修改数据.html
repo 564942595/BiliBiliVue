@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vuex</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  <script src='https://unpkg.com/vuex'></script>
+</head>
+<body>
+	<div id="app">
+		<!-- 第6步 -->
+		<button @click='add(5)'>+5</button>
+		<button @click='inc(5)'>-5</button>
+
+		<login></login>
+   	</div>
+
+   
+<script>
+//第一步，引入VUEX
+
+
+
+//第2步
+var store=new Vuex.Store({
+	state:{//存储的数据
+		count:0
+	},
+	getters:{//过滤数据
+		msgNew(state){
+			return "新的："+state.count
+		}
+	},
+	mutations:{//第3步    //操作数据，只支持同步操作   第一个参数是state
+		addMutation(state,num){
+			return state.count+=num
+		},
+		incMutation(state,num){
+			return state.count-=num
+		}
+	},
+	actions:{//第4步
+	//可以执行异步操作（包括请求数据，setTimeout），不能直接修改数据，要通过调用mutation执行
+	//第一个参数是context
+		addAction(context,n){
+			setTimeout(
+					function(){return context.commit('addMutation',n)//依旧是commit触发
+				},2000)
+		},
+		incAction(context,n){
+			return context.commit('incMutation',n)
+		}
+	}
+})
+
+
+var login={
+	template:"<div><p>{{this.$store.state.count}}</p><p>{{this.$store.getters.msgNew}}</p></div>"
+	
+}
+var vm=new Vue({
+		el:'#app',
+		data:{
+		},
+		methods:{
+			add(c){
+			  this.$store.dispatch('addAction',c)//第7步引用
+			},
+			inc(c){
+			  this.$store.dispatch('incAction',c)
+			}
+		},
+		components:{
+			login
+		},
+		store,//第5步
+
+		
+})
+
+</script>
+</body>
+</html>
